@@ -277,7 +277,7 @@ Helix23-Final/
 
 Click below to watch the complete working demo of the project:
 
-[▶ Watch Working Demo](Demo/Working-demo.mp4)
+[▶ Watch Working Demo](demo/Working-demo.mp4)
 
 ---
 
