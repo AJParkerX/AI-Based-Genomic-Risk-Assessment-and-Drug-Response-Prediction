@@ -273,6 +273,14 @@ Helix23-Final/
 
 ---
 
+# Demo Video
+
+Click below to watch the complete working demo of the project:
+
+[▶ Watch Working Demo](Demo/Working-demo.mp4)
+
+---
+
 ##  Notes
 
 - `best_model.pt` (Transformer) is required for the genomic risk endpoint — do not delete
