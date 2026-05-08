@@ -1,0 +1,133 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* subtle grain + vignette for depth */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(1200px 600px at 80% 20%, rgba(141,92,246,.15), transparent),
+    radial-gradient(800px 400px at 10% 40%, rgba(141,92,246,.12), transparent),
+    radial-gradient(1200px 900px at 50% 100%, rgba(164,119,255,.08), transparent);
+  mix-blend-mode: screen;
+}
+
+.glass {
+  background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,.08);
+  box-shadow: 0 10px 40px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.05);
+}
+
+
+/* button */
+.btn-primary {
+  @apply inline-flex items-center justify-center rounded-xl2 bg-gp_primary px-6 py-3 font-semibold text-white transition-all duration-300;
+  box-shadow: 0 10px 30px rgba(141,92,246,.45);
+}
+.btn-primary:hover { transform: translateY(-1px); box-shadow: 0 16px 40px rgba(141,92,246,.6); }
+.btn-ghost {
+  @apply rounded-xl2 px-4 py-2 font-medium text-gp_primary border border-gp_primary/30 hover:bg-gp_primary/10 transition;
+}
+
+/* floating dots in hero bg */
+.hero-dots {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(255,255,255,.06) 1px, transparent 1px);
+  background-size: 18px 18px;
+  mask-image: radial-gradient(800px 400px at 70% 30%, #000 60%, transparent 100%);
+  opacity: .35;
+}
+
+/* card hover */
+.card {
+  @apply glass rounded-xl2 p-6 transition-transform duration-300;
+}
+.card:hover { transform: translateY(-4px); }
+
+/* DNA animation: slow rotate + gentle vertical float */
+.dna-wrap {
+  display: block;
+}
+
+.dna-svg {
+  width: 100%;
+  height: 100%;
+  max-width: 360px;   /* control max display size in hero */
+  max-height: 520px;
+  will-change: transform;
+  transform-origin: 50% 50%;
+  /* start slightly tilted so it matches mockup orientation */
+  transform: rotate(-6deg);
+  filter: drop-shadow(0 8px 30px rgba(120, 60, 240, 0.07));
+  transition: transform 220ms ease;
+  animation: dna-rotate 36s linear infinite, dna-float 6s ease-in-out infinite;
+}
+
+/* very slow rotation around center */
+@keyframes dna-rotate {
+  from { transform: rotate(-6deg) translateZ(0); }
+  to   { transform: rotate(354deg) translateZ(0); } /* -6 -> 354 equals +360 rotation while keeping tilt */
+}
+
+/* gentle up/down floating */
+@keyframes dna-float {
+  0%   { transform: rotate(-6deg) translateY(0); }
+  50%  { transform: rotate(-6deg) translateY(-6px); }
+  100% { transform: rotate(-6deg) translateY(0); }
+}
+
+/* smaller screens: make it smaller */
+@media (max-width: 900px) {
+  .dna-svg { max-width: 260px; max-height: 420px; }
+}
+
+.dna-svg {
+  width: 100%;
+  height: 100%;
+  max-width: 360px;
+  max-height: 520px;
+  will-change: transform;
+  transform-origin: 50% 50%;
+  transform: rotate(-6deg);
+  filter: drop-shadow(0 8px 30px rgba(120, 60, 240, 0.07));
+  transition: transform 220ms ease;
+  animation: dna-rotate 20s linear infinite,
+             dna-float 5s ease-in-out infinite,
+             dna-sway 8s ease-in-out infinite;
+}
+
+/* faster rotation */
+@keyframes dna-rotate {
+  from { transform: rotate(-6deg) translateZ(0); }
+  to   { transform: rotate(354deg) translateZ(0); }
+}
+
+/* stronger vertical float */
+@keyframes dna-float {
+  0%   { transform: rotate(-6deg) translateY(0); }
+  50%  { transform: rotate(-6deg) translateY(-15px); }
+  100% { transform: rotate(-6deg) translateY(0); }
+}
+
+/* subtle side sway */
+@keyframes dna-sway {
+  0%   { transform: rotate(-6deg) translateX(0); }
+  50%  { transform: rotate(-6deg) translateX(10px); }
+  100% { transform: rotate(-6deg) translateX(0); }
+}
+
+.loader {
+  border-radius: 50%;
+  animation: spin 1.2s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
